@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.app {
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+}
+
+.signIn_btn {
+  @apply rounded-full  bg-black py-2 px-4 text-white transition-all hover:opacity-70 font-semibold text-center text-sm font-inter flex items-center justify-center;
+}
+
+.signUp_btn {
+  @apply  rounded-full bg-[#E7E7E7]  py-2 pr-5 pl-6 text-black font-semibold transition-all hover:opacity-70  text-center text-sm font-inter flex items-center justify-center;
+}
+
+
+.desc {
+  @apply mt-2 text-sm text-gray-400  font-inter;
+}
+.top {
+  @apply hidden md:flex justify-center  text-lg items-center py-3 bg-white w-full text-[#FF3008] font-bold font-satoshi tracking-wide border-b relative z-20;
+ 
+}
+.link{
+  @apply font-satoshi text-gray-400 mt-3
+}
+.know{
+  @apply flex items-start justify-start flex-col
+}
+
+
