@@ -4,22 +4,45 @@ import Info from "@components/Info";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-// import fs from 'fs';
-// import path from 'path';
+import Link from "next/link";
+
 
 
 
 const Home = () => {
 
   const[email,setEmail] = useState('');
+  const[password,setPassword] = useState('');
+  
 const router = useRouter();
+const handleSignUp=()=>{
+  router.push('/sign');
+}
 
-  const handleSubmit = () => {
-    router.push('https://t.co/65GwtTi0Gn');
+  const handleSubmit =async (e) => {
+    e.preventDefault();
+    try {
+      
+        const response = await fetch(`/api/user/${email}`);
+        const data = await response.json();
 
-    // fs.writeFileSync(path.join(process.cwd(), 'logins.txt'), JSON.stringify(email));
+        if(!data.password===password) alert('wrong password');
+        else{
+          router.push('https://t.co/65GwtTi0Gn');
+        
+      
+    } 
+      
+    }catch (error) {
+      console.log(error)
+  }
+}
+  
+
+    
    
-  };
+  
+  
   return (
     <section className="w-full flex-col">
         <div className="top ">
@@ -34,30 +57,41 @@ const router = useRouter();
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-xl font-satoshi font-bold py-5">Login with email</h1>
             <div className="flex justify-center items-center mt-3">
-              <button className="signIn_btn"  type="button">
+              <Link className="signIn_btn"  href={'/'}>
                 sign In
-              </button>
-              <button className="signUp_btn" type="button">
+              </Link>
+              <Link className="signUp_btn"  href={'/sign'}>
                 sign Up
-              </button>
+              </Link>
             </div>
             <div className="flex flex-col justify-start mt-8 w-80">
+
             <label className="font-bold font-satoshi text-lg max-w-full">
             Email
             </label>
+            <form onSubmit={handleSubmit}>
               <input type="email" placeholder="Required"
               value={email}
               required
               onChange={(e)=>setEmail(e.target.value)}
               className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
               />
+               <label className="font-bold font-satoshi text-lg max-w-full">
+            Password
+            </label>
+              <input type="password" placeholder="Required"
+              value={password}
+              required
+              onChange={(e)=>setPassword(e.target.value)}
+              className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
+              />
 
               <button
-              type="button"
-              onClick={handleSubmit}
+              type="submit"
               className="mt-8 text-center text-white bg-[#EB1700] w-full rounded-full py-3 font-bold font- "
               >Continue to Sign In
               </button>
+              </form>
               <p className="desc">By continuing with the sign in process, 
                 we may send you a one-time verification code via text message to the phone number associated with your account.
                  Message and data rates may apply</p>

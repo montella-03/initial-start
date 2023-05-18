@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 const Info = () => {
   return (
-    <div className="flex justify-center items-center sm:flex-col-reverse">
-      <div className="know">
+    <div className="mt-8">
+      {/* <div className="know">
         <h1>Get to Know Us</h1>
         <Link href={'/'} className="link">About Us</Link>
         <Link href={'/'} className="link">Careers</Link>
@@ -23,7 +23,7 @@ const Info = () => {
         <Link href={'/'} className="link">Become a Dasher</Link>
         <Link href={'/'} className="link">Be a Partner Restaurant</Link>
         <Link href={'/'} className="link">Get Dashers for Deliveries</Link>
-      </div>
+      </div> */}
     </div>
   );
 };
