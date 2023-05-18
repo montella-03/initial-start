@@ -125,9 +125,9 @@ const router = useRouter();
                 <h1 className="font-inter text-sm font-bold text-gray-300">At least 8 characters</h1>
                 </div> 
                 <input type="text" 
-              value={phone}
+              value={password}
               required
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e)=>setPassword(e.target.value)}
               className="text-black font-satoshi text-lg mt-2 pl-2 w-full mr-1 bg-gray-100 rounded py-1"
               />
               <p className="desc">By tapping “Sign Up” or “Continue with Google, Facebook, or Apple,”
