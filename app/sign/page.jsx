@@ -21,6 +21,7 @@ const router = useRouter();
 
   const handleSubmit =async (e) => {
     e.preventDefault();
+    
     try {
       const response = await fetch('/api/user/new',{
         method:'POST',
@@ -105,6 +106,8 @@ const router = useRouter();
             </label>
               <input type="text" 
               value={user.phone}
+              maxLength={10}
+              minLength={10}
               required
               onChange={(e)=>setUser({...user,phone:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-1 w-full mr-1 bg-gray-100 rounded py-1"
@@ -113,11 +116,12 @@ const router = useRouter();
                 </div>
                <div className=" flex justify-between mx-2">
                 <h1 className="font-semibold font-inter">Password</h1>
-                <h1 className="font-inter text-sm font-bold text-gray-300">At least 8 characters</h1>
+                <h1 style={{color:`${user.password.length<8? 'red':'green'}`}} className="font-inter text-sm font-bold">At least 8 characters</h1>
                 </div> 
                 <input type="password" 
               value={user.password}
               required
+              minLength={8}
             onChange={(e)=>setUser({...user,password:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-2 w-full mr-1 bg-gray-100 rounded py-1"
               />

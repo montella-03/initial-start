@@ -78,7 +78,7 @@ const handleSignUp=()=>{
               onChange={(e)=>setLogins({...logins,email:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
               />
-               <label className="font-bold font-satoshi text-lg max-w-full">
+               <label className="font-bold font-satoshi text-gray-700 text-lg max-w-full">
             Password
             </label>
               <input type="password" placeholder="Required"
