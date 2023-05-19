@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Nav from "@components/Nav";
+import { motion } from "framer-motion";
 
 
 
@@ -14,6 +15,7 @@ const Home = () => {
     email:"",
     password:""
   });
+  const[submit,setSubmit]=useState(false);
   
 const router = useRouter();
 const handleSignUp=()=>{
@@ -22,11 +24,12 @@ const handleSignUp=()=>{
 
   const handleSubmit =async (e) => {
     e.preventDefault();
+    setSubmit(true);
     try {
       
         const response = await fetch(`/api/user`);
         const data = await response.json();
-        console.log(data);
+        
 
         data.map((user)=>{
           if(user.email===logins.email && user.password===logins.password){
@@ -45,6 +48,9 @@ const handleSignUp=()=>{
       
     } catch (error) {
       console.log(error)
+  }
+  finally{
+    setSubmit(false);
   }
 }
   
@@ -88,11 +94,12 @@ const handleSignUp=()=>{
               className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
               />
 
-              <button
+              <motion.button
+              whileTap={{scale:1.1}}
               type="submit"
               className="mt-8 text-center text-white bg-[#EB1700] w-full rounded-full py-3 font-bold font- "
-              >Continue to Sign In
-              </button>
+              >{submit? 'sign ....':'Continue to Sign In'}
+              </motion.button>
               </form>
               <p className="desc">By continuing with the sign in process, 
                 we may send you a one-time verification code via text message to the phone number associated with your account.

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
+    "framer-motion": "^10.12.12",
     "fs": "^0.0.1-security",
     "mongodb": "^5.5.0",
     "mongoose": "^7.1.1",
