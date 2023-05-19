@@ -1,7 +1,6 @@
 'use client'
 import IconButton from "@components/IconButton";
-import Info from "@components/Info";
-import Image from "next/image";
+import Info from "@components/Info"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
