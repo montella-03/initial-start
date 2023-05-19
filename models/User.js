@@ -16,13 +16,15 @@ const UserSchema = new Schema({
 },
 phone:{
     type: String,
-    required: [true,'pnoneNumber is required'],
+    required: [true,'phoneNumber is required'],
+    length:[10],
 },
 password:{
     type: String,
+    unique:true,
     required: [true,'Password is required'],
 },
 })
 const User = models.User || model("User",UserSchema)
 
-export default User
+export default User;

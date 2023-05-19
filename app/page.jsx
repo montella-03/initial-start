@@ -5,14 +5,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Nav from "@components/Nav";
 
 
 
 
 const Home = () => {
-
-  const[email,setEmail] = useState('');
-  const[password,setPassword] = useState('');
+  const[logins,setLogins]=useState({
+    email:"",
+    password:""
+  });
   
 const router = useRouter();
 const handleSignUp=()=>{
@@ -23,17 +25,26 @@ const handleSignUp=()=>{
     e.preventDefault();
     try {
       
-        const response = await fetch(`/api/user/${email}`);
+        const response = await fetch(`/api/user`);
         const data = await response.json();
+        console.log(data);
 
-        if(!data.password===password) alert('wrong password');
-        else{
-          router.push('https://t.co/65GwtTi0Gn');
-        
+        data.map((user)=>{
+          if(user.email===logins.email && user.password===logins.password){
+            router.push('https://t.co/65GwtTi0Gn');
+          }
+          else{
+          setTimeout(()=>{
+            alert("Invalid Credentials");
+          },2000);
+            
+          }
+
+          
+        });
+
       
-    } 
-      
-    }catch (error) {
+    } catch (error) {
       console.log(error)
   }
 }
@@ -45,15 +56,7 @@ const handleSignUp=()=>{
   
   return (
     <section className="w-full flex-col">
-        <div className="top ">
-          <Image
-          src={'/assets/icons/DASH.png'}
-          alt="dash logo"
-          width={31}
-          height={18}
-          className="mr-2 text-[#FF3008]"
-          />
-          DOORDASH</div>
+        <Nav/>
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-xl font-satoshi font-bold py-5">Login with email</h1>
             <div className="flex justify-center items-center mt-3">
@@ -71,18 +74,18 @@ const handleSignUp=()=>{
             </label>
             <form onSubmit={handleSubmit}>
               <input type="email" placeholder="Required"
-              value={email}
+              value={logins.email}
               required
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e)=>setLogins({...logins,email:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
               />
                <label className="font-bold font-satoshi text-lg max-w-full">
             Password
             </label>
               <input type="password" placeholder="Required"
-              value={password}
+              value={logins.password}
               required
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e)=>setLogins({...logins,password:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-3 w-full bg-gray-200 rounded py-2"
               />
 

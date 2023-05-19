@@ -1,61 +1,52 @@
 'use client'
 import IconButton from "@components/IconButton";
 import Info from "@components/Info";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Nav from "@components/Nav";
 
 
 
 
 const Sign = () => {
-
-  const[email,setEmail] = useState('');
-  const[password,setPassword] = useState('');
-  const[phone,setPhone]=useState('');
-  const[firstname,setFirstname]=useState('');
-  const[lastname,setLastName]=useState('');
-  
+  const [user,setUser]=useState({
+    email:'',
+    password:'',
+    phone:'',
+    firstname:'',
+    lastname:'',
+     });
 const router = useRouter();
 
-  const handleSubmit =async () => {
+  const handleSubmit =async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch('/api/user/new',{
         method:'POST',
         body:JSON.stringify({
-          firstname,
-          lastname,
-          email,
-          phone,
-          password
+          firstname:user.firstname,
+          lastname:user.lastname,
+          email:user.email,
+          phone:user.phone,
+          password:user.password
         })
-      })
+      });
       if(response.ok){
         router.push('/');
       }
     } catch (error) {
-      console.log(error);
+    alert(error);
     }
    
 
     
    
   };
-  const handleSignUp=()=>{
-    router.push('/sign');
-  }
+ 
   return (
     <section className="w-full flex-col">
-        <div className="top ">
-          <Image
-          src={'/assets/icons/DASH.png'}
-          alt="dash logo"
-          width={31}
-          height={18}
-          className="mr-2 text-[#FF3008]"
-          />
-          DOORDASH</div>
+        <Nav/>
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-xl font-satoshi font-bold pt-5">Sign Up</h1>
             <h1 className="font-inter text-gray-500">Already have an account?<Link className="text-red-500 font-semibold " href={'/'}>Sign In</Link></h1>
@@ -68,9 +59,9 @@ const router = useRouter();
             FirstName
             </label>
               <input type="text" 
-              value={firstname}
+              value={user.firstname}
               required
-              onChange={(e)=>setFirstname(e.target.value)}
+              onChange={(e)=>setUser({...user, firstname:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 ml-1 pl-1 w-full bg-gray-100 rounded py-1"
               />
                 </div>
@@ -79,9 +70,9 @@ const router = useRouter();
             LastName
             </label>
               <input type="text" 
-              value={lastname}
+              value={user.lastname}
               required
-              onChange={(e)=>setLastName(e.target.value)}
+              onChange={(e)=>setUser({...user,lastname:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-1 w-full mr-1 bg-gray-100 rounded py-1"
               />
                 </div>
@@ -91,9 +82,9 @@ const router = useRouter();
             Email
             </label>
               <input type="email" 
-              value={email}
+              value={user.email}
               required
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e)=>setUser({...user,email:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 mx-2 w-full pl-3 bg-gray-100 rounded py-1"
               />
                 <div className="flex justify-center items-center gap-3 mb-4 mt-3">
@@ -113,9 +104,9 @@ const router = useRouter();
             Mobile Number
             </label>
               <input type="text" 
-              value={phone}
+              value={user.phone}
               required
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e)=>setUser({...user,phone:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-1 w-full mr-1 bg-gray-100 rounded py-1"
               />
                 </div>
@@ -124,10 +115,10 @@ const router = useRouter();
                 <h1 className="font-semibold font-inter">Password</h1>
                 <h1 className="font-inter text-sm font-bold text-gray-300">At least 8 characters</h1>
                 </div> 
-                <input type="text" 
-              value={password}
+                <input type="password" 
+              value={user.password}
               required
-              onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e)=>setUser({...user,password:e.target.value})}
               className="text-black font-satoshi text-lg mt-2 pl-2 w-full mr-1 bg-gray-100 rounded py-1"
               />
               <p className="desc">By tapping “Sign Up” or “Continue with Google, Facebook, or Apple,”
